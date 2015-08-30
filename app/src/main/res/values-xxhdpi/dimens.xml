@@ -1,0 +1,13 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="light_width">380dp</dimen>
+    <dimen name="light_height">380dp</dimen>
+    <dimen name="light_text_size">64sp</dimen>
+    <dimen name="menu_width">640dp</dimen>
+    <dimen name="menu_height">200dp</dimen>
+    <dimen name="menu_text_size">48sp</dimen>
+    <dimen name="voice_width">320dp</dimen>
+    <dimen name="voice_height">320dp</dimen>
+    <dimen name="voice_text_size">60sp</dimen>
+    <dimen name="margin_top">40dp</dimen>
+</resources>

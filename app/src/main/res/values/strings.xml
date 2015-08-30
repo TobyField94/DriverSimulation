@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">路考助手</string>
+    <string name="light_test">灯光模拟考试</string>
+    <string name="voice_test">科目三考试手动播报</string>
+    <string name="about_us">关于我们</string>
+
+    <!-- 灯光-->
+    <string-array name="light">
+        <item>灯光01</item>
+        <item>灯光02</item>
+        <item>灯光03</item>
+        <item>灯光04</item>
+        <item>灯光05</item>
+        <item>灯光06</item>
+        <item>灯光07</item>
+        <item>灯光08</item>
+    </string-array>
+    <!-- 灯光-->
+    <string-array name="voice">
+        <item>准备考试</item>
+        <item>起步</item>
+        <item>路口直行</item>
+        <item>变更车道</item>
+        <item>公交车站</item>
+        <item>通过学校</item>
+        <item>直线行驶</item>
+        <item>路口左转</item>
+        <item>路口右转</item>
+        <item>加减档</item>
+        <item>会车</item>
+        <item>超车</item>
+        <item>减速</item>
+        <item>限速</item>
+        <item>无人人行道</item>
+        <item>有人人行道</item>
+        <item>隧道</item>
+        <item>掉头</item>
+        <item>靠边停车</item>
+    </string-array>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
