@@ -16,55 +16,37 @@ import java.util.List;
 
 import me.darklost.driversimulation.R;
 import me.darklost.driversimulation.activity.ContentActivity;
-import me.darklost.driversimulation.adapter.VoiceAdapter;
+import me.darklost.driversimulation.adapter.LightAdapter;
 import me.darklost.driversimulation.fragment.base.BaseFragment;
 import me.darklost.driversimulation.utils.MidPlayer;
 
 /**
  * Created by dengke on 15/8/28.
  */
-public class VoiceFragment extends BaseFragment implements  VoiceAdapter.onItemClickListner{
+public class RawFragment extends BaseFragment implements  LightAdapter.onItemClickListner{
 
     MidPlayer mp;
-    private List<Integer> voices;
+    private List<Integer> raws;
     public static Fragment getInstance(){
 
-        return  new VoiceFragment();
+        return  new RawFragment();
 
     }
 
     private  RecyclerView grid_recyclerview;
 
-    private VoiceAdapter adapter;
+    private LightAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mp=new MidPlayer(getActivity());
-        voices=new ArrayList<Integer>();
-        voices.add(R.raw.voice_0);
-        voices.add(R.raw.voice_1);
-        voices.add(R.raw.voice_2);
-        voices.add(R.raw.voice_3);
-        voices.add(R.raw.voice_4);
-        voices.add(R.raw.voice_5);
-        voices.add(R.raw.voice_6);
-        voices.add(R.raw.voice_7);
-        voices.add(R.raw.voice_8);
-        voices.add(R.raw.voice_9);
-        voices.add(R.raw.voice_10);
-        voices.add(R.raw.voice_11);
-        voices.add(R.raw.voice_12);
-        voices.add(R.raw.voice_13);
-        voices.add(R.raw.voice_14);
-        voices.add(R.raw.voice_15);
-        voices.add(R.raw.voice_16);
-        voices.add(R.raw.voice_17);
-        voices.add(R.raw.voice_18);
-        voices.add(R.raw.voice_19);
-        voices.add(R.raw.voice_20);
-        voices.add(R.raw.voice_21);
-        voices.add(R.raw.voice_22);
+        raws=new ArrayList<Integer>();
+        raws.add(R.raw.raw1);
+        raws.add(R.raw.raw2);
+        raws.add(R.raw.raw3);
+        raws.add(R.raw.raw4);
+        raws.add(R.raw.raw5);
 
 
 
@@ -93,13 +75,13 @@ public class VoiceFragment extends BaseFragment implements  VoiceAdapter.onItemC
         ContentActivity activity= (ContentActivity) getActivity();
         grid_recyclerview= (RecyclerView) activity.findViewById(R.id.grid_recyclerview);
 
-        activity.getSupportActionBar().setTitle(R.string.voice_test);
+        activity.getSupportActionBar().setTitle(R.string.raw_test);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity. getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         // 创建一个线性布局管理器
-        GridLayoutManager layoutManager = new GridLayoutManager(activity,7, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(activity,4, LinearLayoutManager.VERTICAL, false);
 
         // 设置布局管理器
         grid_recyclerview.setLayoutManager(layoutManager);
@@ -112,8 +94,8 @@ public class VoiceFragment extends BaseFragment implements  VoiceAdapter.onItemC
 
     @Override
     public void initData() {
-        String[] lights= getActivity().getResources().getStringArray(R.array.voice);
-        adapter=new VoiceAdapter(Arrays.asList(lights));
+        String[] raws= getActivity().getResources().getStringArray(R.array.raw);
+        adapter=new LightAdapter(Arrays.asList(raws));
         grid_recyclerview.setAdapter(adapter);
     }
 
@@ -122,11 +104,10 @@ public class VoiceFragment extends BaseFragment implements  VoiceAdapter.onItemC
         System.out.println("position" + position);
         try {
             mp.stopSound();
-            mp.playMusic(voices.get(position));
+            mp.playMusic(raws.get(position));
         }catch (Exception ex){
             ex.printStackTrace();
         }
-
 
     }
 }

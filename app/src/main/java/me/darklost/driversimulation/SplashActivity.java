@@ -1,12 +1,20 @@
 package me.darklost.driversimulation;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import me.darklost.driversimulation.utils.ProtectUtils;
+import me.drakeet.materialdialog.MaterialDialog;
 
 
 /**
@@ -17,35 +25,23 @@ public class SplashActivity extends Activity {
 
     private static final String DTATA_TAG="DATA_TAG";
 
-    private static final String FIRST_TAG="FIRST_TAG";
-    private static final String TIME_TAG="TIME_TAG";
+    private static final String DEVICE_ID="DEVICE_ID_BASE64";
     private  boolean isExit=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash);
-        SharedPreferences mSharedPreferences = getSharedPreferences(DTATA_TAG,Activity.MODE_PRIVATE);
-        boolean first=mSharedPreferences.getBoolean(FIRST_TAG,true);
-        if(first){
-            long time=System.currentTimeMillis();
-            SharedPreferences.Editor editor=mSharedPreferences.edit();
-            editor.putBoolean(FIRST_TAG,false);
-            editor.putLong(TIME_TAG,time);
-            editor.commit();
-            Toast.makeText(this,"第一次试用",Toast.LENGTH_LONG).show();
-        }else{
-            long now=System.currentTimeMillis();
-            long last=mSharedPreferences.getLong(TIME_TAG,now);
-            if(now -last>=7*24*60*60){
-                Toast.makeText(this,"超出试用期",Toast.LENGTH_LONG).show();
+        SharedPreferences mSharedPreferences = getSharedPreferences(DTATA_TAG, Activity.MODE_PRIVATE);
+        String save=mSharedPreferences.getString(DEVICE_ID, "");
+        String deviceId= ProtectUtils.getOblyDevicesID(this);
+        System.out.println("DK DeviceID=" + deviceId);
+        System.out.println("DK save=" + save);
+        if(!deviceId.equals(save)){
                 isExit=true;
-
-            }
-            Toast.makeText(this,"处于试用期中",Toast.LENGTH_LONG).show();
         }
-
-
+        System.out.println("DK Base64="+isExit);
         AlphaAnimation myAnimation_Alpha;//定义动画
         myAnimation_Alpha=new AlphaAnimation(0.1f, 1.0f);//初始化动画对象 参数1 动画开始时候透明度 参数2 动画结束时候透明度
         myAnimation_Alpha.setDuration(3000);//设置时间持续时间为 5000毫秒
@@ -57,13 +53,62 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                System.out.println("DK onAnimationEnd=" + isExit);
                 if (isExit) {
+
+                    final MaterialDialog dialog = new MaterialDialog(SplashActivity.this);
+                    dialog.setTitle(R.string.register);
+                    View view = View.inflate(SplashActivity.this, R.layout.dialog_register, null);
+                    dialog.setContentView(view);
+                    TextView tv = (TextView) view.findViewById(R.id.register_tv);
+                    tv.setText(new String(Base64.encode(ProtectUtils.getOblyDevicesID(SplashActivity.this).getBytes(), Base64.DEFAULT)));
+                    final EditText et = (EditText) view.findViewById(R.id.register_et);
+                    Button bt = (Button) view.findViewById(R.id.register_bt);
+                    bt.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            try {
+                                String str = et.getText().toString();
+                                String out = new String(Base64.decode(str, Base64.DEFAULT));
+                                if (ProtectUtils.getOblyDevicesID(SplashActivity.this).equals(str)) {
+                                    System.out.println("DK mboolean=" + isExit);
+                                    SharedPreferences mSharedPreferences = getSharedPreferences(DTATA_TAG, Activity.MODE_PRIVATE);
+                                    mSharedPreferences.edit().putString(DEVICE_ID, str).commit();
+                                    SplashActivity.this.startActivity(new Intent(SplashActivity.this
+                                            , MainActivity.class));
+                                    SplashActivity.this.finish();
+                                } else {
+                                    isExit = true;
+                                    SplashActivity.this.finish();
+                                    System.exit(0);
+                                }
+                            } catch (Exception ex){
+                                ex.printStackTrace();
+                            }
+
+
+                        }
+                    });
+                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+                            if (isExit) {
+
+                                SplashActivity.this.finish();
+                                System.exit(0);
+                            }
+                        }
+                    });
+                    dialog.show();
+
+                } else {
+
+
+                    SplashActivity.this.startActivity(new Intent(SplashActivity.this
+                            , MainActivity.class));
                     SplashActivity.this.finish();
-                    System.exit(0);
                 }
-                SplashActivity.this.startActivity(new Intent(SplashActivity.this
-                        , MainActivity.class));
-                SplashActivity.this.finish();
 
             }
 

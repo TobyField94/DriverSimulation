@@ -13,7 +13,6 @@ import me.darklost.driversimulation.activity.ContentActivity;
 import me.darklost.driversimulation.activity.base.ToolbarActivity;
 import me.darklost.driversimulation.adapter.MenuAdapter;
 import me.darklost.driversimulation.view.FullyLinearLayoutManager;
-import me.darklost.driversimulation.view.MyItemDecoration;
 import me.drakeet.materialdialog.MaterialDialog;
 
 public class MainActivity extends ToolbarActivity implements MenuAdapter.onItemClickListner {
@@ -39,7 +38,6 @@ public class MainActivity extends ToolbarActivity implements MenuAdapter.onItemC
 
         // 设置布局管理器
         main_recyclerview.setLayoutManager(layoutManager);
-        main_recyclerview.addItemDecoration(new MyItemDecoration());
     }
 
     @Override
@@ -52,6 +50,7 @@ public class MainActivity extends ToolbarActivity implements MenuAdapter.onItemC
     //初始化数据
     public void initData() {
         ArrayList<String> arr = new ArrayList<String>();
+        arr.add("科目二考试手动播报");
         arr.add("灯光模拟考试");
         arr.add("科目三考试手动播报");
         MenuAdapter adapter = new MenuAdapter(arr);

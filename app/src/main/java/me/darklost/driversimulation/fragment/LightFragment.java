@@ -19,7 +19,6 @@ import me.darklost.driversimulation.activity.ContentActivity;
 import me.darklost.driversimulation.adapter.LightAdapter;
 import me.darklost.driversimulation.fragment.base.BaseFragment;
 import me.darklost.driversimulation.utils.MidPlayer;
-import me.darklost.driversimulation.view.MyItemDecoration;
 
 /**
  * Created by dengke on 15/8/28.
@@ -48,9 +47,7 @@ public class LightFragment extends BaseFragment implements  LightAdapter.onItemC
         lights.add(R.raw.light3);
         lights.add(R.raw.light4);
         lights.add(R.raw.light5);
-        lights.add(R.raw.light6);
-        lights.add(R.raw.light7);
-        lights.add(R.raw.light8);
+
 
 
     }
@@ -88,7 +85,6 @@ public class LightFragment extends BaseFragment implements  LightAdapter.onItemC
 
         // 设置布局管理器
         grid_recyclerview.setLayoutManager(layoutManager);
-        grid_recyclerview.addItemDecoration(new MyItemDecoration());
     }
 
     @Override

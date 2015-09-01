@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import me.darklost.driversimulation.R;
 import me.darklost.driversimulation.activity.base.ToolbarActivity;
 import me.darklost.driversimulation.fragment.LightFragment;
+import me.darklost.driversimulation.fragment.RawFragment;
 import me.darklost.driversimulation.fragment.VoiceFragment;
 
 /**
@@ -22,18 +23,25 @@ public class ContentActivity extends ToolbarActivity {
         setContentView(R.layout.activity_content);
         switch (tag) {
             case 0:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_activity, RawFragment.getInstance())
+                        .commit();
+                break;
+            case 1:
 
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_activity, LightFragment.getInstance())
                         .commit();
                 break;
-            case 1:
+            case 2:
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_activity, VoiceFragment.getInstance())
                         .commit();
                 break;
+
         }
     }
 

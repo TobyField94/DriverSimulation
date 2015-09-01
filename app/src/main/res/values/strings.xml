@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">路考助手</string>
+    <string name="raw_test">科目二考试手动播报</string>
     <string name="light_test">灯光模拟考试</string>
     <string name="voice_test">科目三考试手动播报</string>
     <string name="about_us">关于我们</string>
-
+    <string name="register">注册激活</string>
+    <string name="register_about">\t\t请于与D.K联系好后，发送下面的机器码，用于获取激活码激活本机\n联系方式\n手机:18670333743\nQQ:453523830</string>
+    <string name="register_notice">长按上面机器码可复制</string>
+    <string name="register_notice_1">请输入用上面机器码生成的激活码</string>
+    <string name="register_active">激活</string>
+    <!-- 科目二-->
+    <string-array name="raw">
+        <item>倒车入库</item>
+        <item>上坡起步</item>
+        <item>侧方停车</item>
+        <item>曲线行驶</item>
+        <item>直角转弯</item>
+    </string-array>
     <!-- 灯光-->
     <string-array name="light">
         <item>灯光01</item>
@@ -11,31 +24,32 @@
         <item>灯光03</item>
         <item>灯光04</item>
         <item>灯光05</item>
-        <item>灯光06</item>
-        <item>灯光07</item>
-        <item>灯光08</item>
     </string-array>
-    <!-- 灯光-->
+    <!-- 科目三-->
     <string-array name="voice">
-        <item>准备考试</item>
-        <item>起步</item>
-        <item>路口直行</item>
-        <item>变更车道</item>
-        <item>公交车站</item>
-        <item>通过学校</item>
-        <item>直线行驶</item>
-        <item>路口左转</item>
+        <item>点火提示</item>
+        <item>上车准备</item>
+        <item>起步提示</item>
+        <item>人行横道</item>
+        <item>路考直行</item>
         <item>路口右转</item>
-        <item>加减档</item>
-        <item>会车</item>
-        <item>超车</item>
-        <item>减速</item>
-        <item>限速</item>
-        <item>无人人行道</item>
-        <item>有人人行道</item>
-        <item>隧道</item>
-        <item>掉头</item>
+        <item>学校区域</item>
+        <item>路口左转</item>
+        <item>公交车站</item>
+        <item>会车提示</item>
+        <item>加减挡位</item>
+        <item>变更车道</item>
+        <item>超车提示</item>
+        <item>掉头提示</item>
+        <item>直线行驶</item>
         <item>靠边停车</item>
+        <item>前方靠边</item>
+        <item>进入发车</item>
+        <item>离开发车</item>
+        <item>考试结束</item>
+        <item>完成下车</item>
+        <item>减到二档</item>
+        <item>加到三档</item>
     </string-array>
 
     <string name="title_activity_splash">SplashActivity</string>
