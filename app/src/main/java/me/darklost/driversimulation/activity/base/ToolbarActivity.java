@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.darklost.driversimulation.R;
 
 
@@ -42,9 +44,11 @@ public abstract class ToolbarActivity extends AppCompatActivity  {
 
     public void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
+        MobclickAgent.onResume(this);
     }
 }

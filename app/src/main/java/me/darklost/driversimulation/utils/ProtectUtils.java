@@ -18,36 +18,57 @@ public class ProtectUtils {
 
     public static final String getOblyDevicesID(Context mContext) {
 
-        TelephonyManager TelephonyMgr = (TelephonyManager) mContext.getSystemService(Activity.TELEPHONY_SERVICE);
-        String m_szImei = TelephonyMgr.getDeviceId();
+        String m_szImei="";
+        try {
+            TelephonyManager TelephonyMgr =null;
+            TelephonyMgr = (TelephonyManager) mContext.getSystemService(Activity.TELEPHONY_SERVICE);
+            m_szImei = TelephonyMgr.getDeviceId();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        String m_szDevIDShort=null;
+        try {
+             m_szDevIDShort = "35" + //we make this look like a valid IMEI
 
-        String m_szDevIDShort = "35" + //we make this look like a valid IMEI
+                    Build.BOARD.length() % 10 +
+                    Build.BRAND.length() % 10 +
+                    Build.CPU_ABI.length() % 10 +
+                    Build.DEVICE.length() % 10 +
+                    Build.DISPLAY.length() % 10 +
+                    Build.HOST.length() % 10 +
+                    Build.ID.length() % 10 +
+                    Build.MANUFACTURER.length() % 10 +
+                    Build.MODEL.length() % 10 +
+                    Build.PRODUCT.length() % 10 +
+                    Build.TAGS.length() % 10 +
+                    Build.TYPE.length() % 10 +
+                    Build.USER.length() % 10; //13 digits
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
 
-                Build.BOARD.length() % 10 +
-                Build.BRAND.length() % 10 +
-                Build.CPU_ABI.length() % 10 +
-                Build.DEVICE.length() % 10 +
-                Build.DISPLAY.length() % 10 +
-                Build.HOST.length() % 10 +
-                Build.ID.length() % 10 +
-                Build.MANUFACTURER.length() % 10 +
-                Build.MODEL.length() % 10 +
-                Build.PRODUCT.length() % 10 +
-                Build.TAGS.length() % 10 +
-                Build.TYPE.length() % 10 +
-                Build.USER.length() % 10; //13 digits
-
-
-        String m_szAndroidID = Settings.Secure.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-
+        String m_szAndroidID="";
+        try {
+            m_szAndroidID = "";
+            Settings.Secure.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        String m_szWLANMAC="";
+        try {
         WifiManager wm = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
-        String m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
-
-
+         m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
+    }catch(Exception ex){
+        ex.printStackTrace();
+    }
+        String m_szBTMAC=null;
+        try {
         BluetoothAdapter m_BluetoothAdapter = null; // Local Bluetooth adapter
         m_BluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        String m_szBTMAC = m_BluetoothAdapter.getAddress();
-
+        m_szBTMAC = m_BluetoothAdapter.getAddress();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
         String m_szLongID = m_szImei + m_szDevIDShort
                 + m_szAndroidID + m_szWLANMAC + m_szBTMAC;
 // compute md5

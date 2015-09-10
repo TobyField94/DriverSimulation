@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,6 +78,19 @@ public class VoiceFragment extends BaseFragment implements  VoiceAdapter.onItemC
 
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart("VoiceFragmnet");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageEnd("VoiceFragmnet");
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -87,6 +102,9 @@ public class VoiceFragment extends BaseFragment implements  VoiceAdapter.onItemC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_grid, container, false);
     }
+
+
+
 
     @Override
     public void findView() {
